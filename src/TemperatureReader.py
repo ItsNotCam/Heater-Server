@@ -2,6 +2,8 @@ import Adafruit_DHT
 import time
 from datetime import datetime
 
+from Logger import Logger
+
 def read_temperature():
     DHT_SENSOR = Adafruit_DHT.DHT11
     DHT_PIN = 4
@@ -12,7 +14,6 @@ def read_temperature():
         _,t = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
         if(t is not None):
             t = (t * 9/5) + 32
-            print(f"{current_time} Temperature: {t}")
             break
         else:
             t = 0

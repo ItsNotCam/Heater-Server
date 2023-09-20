@@ -1,6 +1,8 @@
 import requests, json
 from datetime import datetime
 
+from Logger import Logger
+
 import os, sys
 script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
 CONFIG_PATH = f"{script_directory}/../config.json"
@@ -20,7 +22,7 @@ class HueControl:
 
         res = requests.get(self.hue_url)
         if res is None or res.status_code != 200:
-            print("Failed to retrieve hue data")
+            Logger.log("Failed to retrieve hue data")
             return
         
         data = res.json()['lights']
@@ -30,15 +32,15 @@ class HueControl:
                 break
         
         if self.light_index == -1:
-            print(f"Failed to get light index, do you have a light named '{self.light_name}'?")
+            Logger.log(f"Failed to get light index, do you have a light named '{self.light_name}'?")
             
     def set_state(self, on):
         current_time = datetime.now().strftime("%H:%M:%S")
         if on != self.is_on:
             if on:
-                print(f"{current_time} Turning heater on")
+                Logger.log("Turning heater on")
             else:
-                print(f"{current_time} Turning heater off")
+                Logger.log("Turning heater off")
 
             uri = f"{self.hue_url}/lights/{self.light_index}/state"
             resp = requests.put(uri, data=json.dumps({ "on": on }))

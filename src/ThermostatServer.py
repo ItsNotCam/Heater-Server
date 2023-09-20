@@ -7,7 +7,7 @@ from websockets import serve
 from TemperatureData import TemperatureData
 import TemperatureReader as TR
 from HueControl import HueControl
-
+from Logger import Logger
 
 from datetime import datetime
 import requests
@@ -29,7 +29,15 @@ class ThermostatServer:
         heaterControlThread.join()
 
     def heater_control_thread(self):
+        # Read temperature from DHT11 every 5 seconds
+        lastReadingTime = datetime.now()
+
         while True:
+            deltaTime = (lastReadingTime - datetime.now()).seconds
+            if deltaTime >= 5:
+                self.tempData.temperature = TR.read_temperature()
+                lastReadingTime = datetime.now()
+
             self.hueControl.set_state(self.tempData.temperature < self.tempData.target)
             time.sleep(1)
 
@@ -39,23 +47,23 @@ class ThermostatServer:
         self.tempData.saveState()
 
     async def start_server(self, websocket):
-        print("Sending data task started")
-        lastReadingTime = datetime.now()
+        Logger.log("Sending data task started")
 
         while True:
-            # Read temperature from DHT11 every 5 seconds
-            deltaTime = (lastReadingTime - datetime.now()).seconds
-            if deltaTime >= 5:
-                self.tempData.temperature = TR.read_temperature()
-                lastReadingTime = datetime.now()
-
             message = json.loads(await websocket.recv())
             if message["action"] == "POST":
                 self.tempData.target = message["target"]
                 self.tempData.save_state()
+                
+                target = self.tempData.target
+                Logger.log(f"Changed target to {target}")
 
             dataJSON = self.tempData.to_json_string()
             await websocket.send(dataJSON)
+
+            target = self.tempData.target
+            temperature = self.tempData.temperature
+            Logger.log(f"Temperature: {temperature} Target: {target}")
 
 if __name__ == "__main__":
     thermostatServer = ThermostatServer()
