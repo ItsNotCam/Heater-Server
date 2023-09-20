@@ -1,10 +1,12 @@
 # dependencies
 import time, json, random
-import asyncio, tornado
+import asyncio
+from websockets import serve
 
 # heater server class
 from TemperatureData import TemperatureData
 import TemperatureReader as TR
+from datetime import datetime
 
 class ThermostatServer:
     def __init__(self):
@@ -21,33 +23,23 @@ class ThermostatServer:
         self.tempData.saveState()
 
     async def start_server(self, websocket):
-        recv = asyncio.create_task(self.recv_temperature_data(websocket))
-        send = asyncio.create_task(self.send_temperature_data(websocket))
-        await recv
-        await send
-
-    # Websocket loop
-    async def send_temperature_data(self, websocket):
         print("Sending data task started")
-        while True:
-            # Read temperature from DHT11
-            self.tempData.temperature = TR.read_temperature()
+        lastReadingTime = datetime.now()
 
-            # JSONify the temperature data and send it
+        while True:
+            # Read temperature from DHT11 every 5 seconds
+            deltaTime = (lastReadingTime - datetime.now()).seconds
+            if deltaTime >= 5:
+                self.tempData.temperature = TR.read_temperature()
+                lastReadingTime = datetime.now()
+
+            message = json.loads(await websocket.recv())
+            if message["action"] == "POST":
+                self.tempData.target = message["target"]
+                self.tempData.save_state()
+
             dataJSON = self.tempData.to_json_string()
             await websocket.send(dataJSON)
-
-            # Sleep
-            time.sleep(1)
-
-    async def recv_temperature_data(self, websocket):
-        print("Receive data task started")
-        while True:
-            rawData = await websocket.recv()
-            jsonData = json.loads(rawData)
-            print(jsonData)
-            self.tempData.target = jsonData["target"]
-            self.tempData.save_state()
 
 if __name__ == "__main__":
     thermostatServer = ThermostatServer()
