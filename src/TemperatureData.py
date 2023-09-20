@@ -1,6 +1,8 @@
 import json, random
 
-STATE_PATH = "../state.json"
+import os, sys
+script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+STATE_PATH = f"{script_directory}/../state.json"
 
 class TemperatureData:
     def __init__(self):

@@ -6,16 +6,32 @@ from websockets import serve
 # heater server class
 from TemperatureData import TemperatureData
 import TemperatureReader as TR
+from HueControl import HueControl
+
+
 from datetime import datetime
+import requests
+import threading
 
 class ThermostatServer:
     def __init__(self):
         self.tempData = TemperatureData()
+        self.hueControl = HueControl()
 
     # Run websocket server
     async def run(self):
+        heaterControlThread = threading.Thread(target=self.heater_control_thread)
+        heaterControlThread.start()
+
         async with serve(self.start_server, "", 3005):
             await asyncio.Future()
+
+        heaterControlThread.join()
+
+    def heater_control_thread(self):
+        while True:
+            self.hueControl.set_state(self.tempData.temperature < self.tempData.target)
+            time.sleep(1)
 
     # Update the target temperature and save to disk
     def updateTargetTemperature(targetTemperature):
