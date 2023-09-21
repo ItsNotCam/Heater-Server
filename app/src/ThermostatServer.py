@@ -22,6 +22,7 @@ class ThermostatServer:
         heaterControlThread.start()
 
         async with serve(self.start_server, "", 3005):
+            Logger.log("Thermostat Server Started and Listening")
             await asyncio.Future()
 
         heaterControlThread.join()
@@ -45,7 +46,7 @@ class ThermostatServer:
         self.tempData.saveState()
 
     async def start_server(self, websocket):
-        Logger.log("Sending data task started")
+        Logger.log("Thermostat Server started")
 
         while True:
             message = json.loads(await websocket.recv())
