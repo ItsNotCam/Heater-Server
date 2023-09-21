@@ -32,7 +32,7 @@ The Raspberry Pi Room Temperature Control Application is a full-stack web applic
 - **Asynchronous Websockets**: Asynchronous WebSockets ensure efficient real-time communication between the frontend and the Raspberry Pi.
 
 ## What I Learned
-Through my project, I developed proficiency in ReactJS, Typescript, and WebSockets for creating responsive web applications with real-time communication capabilities. Additionally, I gained hands-on experience in leveraging Raspberry Pi for IoT applications, enabling interactive real-world interactions with physical devices.
+Through my project, I developed proficiency in ReactJS, Typescript, and WebSockets in order to create this responsive web applications with real-time communication capabilities. Additionally, I gained hands-on experience in leveraging Raspberry Pi for IoT applications, enabling interactive real-world interactions with physical devices.
 
 ## Requirements
 
