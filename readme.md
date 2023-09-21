@@ -15,7 +15,6 @@
 The Raspberry Pi Room Temperature Control Application is a full-stack web application that allows users to remotely control and monitor the temperature in a room using a Raspberry Pi, while ensuring safety through the control of a heater via a Philips Hue Smart Plug. This application is built using Python, TypeScript, ReactJS, Node.js, asynchronous Websockets, and REST requests.
 
 
-
 ## Features
 
 - **Temperature Sensing**: The Raspberry Pi collects real-time temperature data in the room to provide accurate information on the current temperature.
@@ -28,18 +27,19 @@ The Raspberry Pi Room Temperature Control Application is a full-stack web applic
 
 - **Python**: The Raspberry Pi communicates with the temperature sensor, listens on the web socket, and controls the Philips Hue Smart Plug using Python.
 
-- **TypeScript**: The frontend of the application is built using TypeScript for type-safe development.
-
-- **ReactJS**: The web user interface is developed using ReactJS, providing an interactive and intuitive experience for users.
+- **ReactJS and TypeScript**: The frontend of the application is developed using ReactJS and Typescript to provide users and developers with the best experience possible
 
 - **Asynchronous Websockets**: Asynchronous WebSockets ensure efficient real-time communication between the frontend and the Raspberry Pi.
+
+## What I Learned
+Through my project, I developed proficiency in ReactJS, Typescript, and WebSockets for creating responsive web applications with real-time communication capabilities. Additionally, I gained hands-on experience in leveraging Raspberry Pi for IoT applications, enabling interactive real-world interactions with physical devices.
 
 ## Requirements
 
 
 - A [Raspberry Pi](https://www.raspberrypi.com)
 
-- [A Phillips Hue Smart Plug](https://www.philips-hue.com/en-us/p/hue-smart-plug/046677552343)
+- A [Phillips Hue Smart Plug](https://www.philips-hue.com/en-us/p/hue-smart-plug/046677552343)
 
 - Python 3.x installed on your Raspberry Pi.
 
