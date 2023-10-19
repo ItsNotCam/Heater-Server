@@ -1,0 +1,4 @@
+flask==3.0.0
+websockets==11.0.3
+requests==2.21.0
+Adafruit_DHT==
