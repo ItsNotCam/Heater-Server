@@ -1,27 +1,18 @@
-# Get interface name for IP
-if [ "$1" = "" ]
-then
-  echo "Usage: $0 <interface name>"
-  exit
-fi;
+cd app
 
-# Install TMUX to run the app
+# Install Dependencies
 sudo apt install tmux python3 python3-pip
-
-# Install python dependencies
-pip3 install -r app/requirements.txt
+pip3 install -r requirements.txt
 
 # Kill TMUX windows running the heater app
-if [ $(tmux list-sessions | grep "heaterpi-web") ];
-then
-  tmux kill-session -t heaterpi-web
-fi
+WINDOW_NAME="heaterpi"
 
-if [ $(tmux list-sessions | grep "heaterpi-socket") ];
-then 
-  tmux kill-session -t heaterpi-socket
+if [ $(tmux list-sessions | grep "$WINDOW_NAME") ];
+then
+  tmux kill-session -t $WINDOW_NAME
 fi
 
 # Start servers in new TMUX sessions
-tmux new-session -d -s heaterpi-web python3 app/WebServer.py
-tmux new-session -d -s heaterpi-web python3 app/SocketServer.py
+tmux new-session -d -s $WINDOW_NAME python3 WebServer.py
+tmux split-window -h -t $WINDOW_NAME
+tmux send-keys -t $WINDOW_NAME "python3 SocketServer.py" C-m
