@@ -1,8 +1,12 @@
 # dependencies
-import time, json, random, requests
+import time, json
 import asyncio, threading
 from datetime import datetime
 from websockets import serve
+
+from src import Logger
+import asyncio
+
 
 # custom classes
 from src import TemperatureData
@@ -10,6 +14,7 @@ from src import TemperatureReader as TR
 from src import HueControl
 from src import Logger
 
+PORT = 3005
 
 class ThermostatServer:
     def __init__(self):
@@ -21,7 +26,7 @@ class ThermostatServer:
         heaterControlThread = threading.Thread(target=self.heater_control_thread)
         heaterControlThread.start()
 
-        async with serve(self.start_server, "", 3005):
+        async with serve(self.start_server, "", PORT):
             Logger.log("Thermostat Server Started and Listening")
             await asyncio.Future()
 
@@ -63,3 +68,9 @@ class ThermostatServer:
             target = self.tempData.target
             temperature = self.tempData.temperature
             Logger.log(f"Temperature: {temperature} Target: {target}")
+
+# RUN
+if __name__ == "__main__":
+    Logger.log("Thermostat Server Starting up")
+    thermostatServer = ThermostatServer()
+    asyncio.run(thermostatServer.run())
