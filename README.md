@@ -6,9 +6,9 @@
 **See the react app source code [here](https://github.com/ItsNotCam/HeaterPi-Client).**
 
 ## Overview
-HeaterPi is a full-stack web application that allows users to **control and monitor the temperature in a room** using a Raspberry Pi, a Phillips Hue Smart Plug, and a standard space heater. Users can access a **website hosted on the RaspberryPi** that will allow them to **set the target temperature for their space**. 
+HeaterPi is a full-stack web application that allows users to **control and monitor the temperature in a room** using a Raspberry Pi, a Phillips Hue Smart Plug, and a standard space heater. 
 
-Upon entering their desired temperature, the RaspberryPi-powered space heater will warm up the room until the desired temperature is reached.
+Users can access a **website hosted on the RaspberryPi** that will allow them to **set the target temperature for their space**. Upon entering their desired temperature, the RaspberryPi-powered space heater will warm up the room until the desired temperature is reached.
 
 This application is built using **Python**, **TypeScript**, and **ReactJS**, and makes use of **websockets**, and **REST** APIs.
 
