@@ -7,12 +7,6 @@ CYAN='\033[0;36m'
 
 cd app
 
-#Install Dependencies
-echo -e "${GREEN}Installing Dependencies${WHITE}"
-sudo apt install tmux python3 python3-pip
-pip3 install -r requirements.txt
-echo ""
-
 # Kill TMUX windows running the heater app
 WINDOW_NAME="heaterpi"
 SESSION=$(tmux list-session | grep $WINDOW_NAME)
