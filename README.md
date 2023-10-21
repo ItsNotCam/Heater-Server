@@ -9,7 +9,9 @@
 HeaterPi is a full-stack web application that allows users to remotely **control and monitor the temperature in a room** using a Raspberry Pi, a Phillips Hue Smart Plug, and a standard space heater. This application is built using **Python**, **TypeScript**, **ReactJS**, **Websockets**, and **REST**.
 
 ## Why
-I currently (2023) am renting a single room in the bottom floor of a home. The windows here are very thin and do not seal properly, so it can get *very* cold during the winter - especially in the night and when sleeping. I own a space heater, but leaving it on unattended when sleeping can be dangerous. To solve this I created HeaterPi.
+I currently (2023) am **renting a single room** in the bottom floor of a home. The **windows here are very thin** and do not seal properly, so it can get *very* cold during the winter - especially in the night and when sleeping. 
+
+**I own a space heater**, but **leaving it on unattended when sleeping can be dangerous**. To solve this **I created HeaterPi**.
 
 ## Features
 - **Temperature Sensor**: The Raspberry Pi collects real-time temperature data in the room to provide accurate information on the current temperature using the [DHT 11](https://components101.com/sensors/dht11-temperature-sensor#:~:text=use%20DHT11%20Sensors-,The%20DHT11%20is%20a%20commonly%20used%20Temperature%20and%20humidity%20sensor,to%20interface%20with%20other%20microcontrollers.) sensor.
