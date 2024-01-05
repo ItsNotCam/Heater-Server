@@ -12,15 +12,15 @@ Users can access a **website hosted on the RaspberryPi** that will allow them to
 
 This application is built using **Python**, **TypeScript**, and **ReactJS**, and makes use of **websockets**, and **REST** APIs.
 
-## Why
-I currently (2023) am **renting a single room** in the bottom floor of a home. The **windows here are very thin** and do not seal properly, so it can get *very* cold during the winter - especially in the night and when sleeping. 
-
-**I own a space heater**, but **leaving it on unattended when sleeping can be dangerous**. To solve this **I created HeaterPi**.
-
 ## Features
 - **Temperature Sensor**: The Raspberry Pi collects real-time temperature data in the room to provide accurate information on the current temperature using the [DHT 11](https://components101.com/sensors/dht11-temperature-sensor#:~:text=use%20DHT11%20Sensors-,The%20DHT11%20is%20a%20commonly%20used%20Temperature%20and%20humidity%20sensor,to%20interface%20with%20other%20microcontrollers.) sensor.
 - **Automated Climate Control**: Users can set a target temperature through a user-friendly web interface accessible from any device with a browser, and the application will autonomously maintain that room temperature in the real world.
 - **WebSocket Communication**: Real-time communication between the web UI and the Raspberry Pi is achieved through WebSockets, ensuring realtime temperature readouts.
+
+## Why
+I currently (2023) am **renting a single room** in the bottom floor of a home. The **windows here are very thin** and do not seal properly, so it can get *very* cold during the winter - especially in the night and when sleeping. 
+
+**I own a space heater**, but **leaving it on unattended when sleeping can be dangerous**. To solve this **I created HeaterPi**.
 
 ## Tech Stack
 - **Python**: The Raspberry Pi communicates with the temperature sensor, listens on the web socket, hosts the http server, and controls the Philips Hue Smart Plug using Python.
